@@ -6,7 +6,7 @@ import { UserInfo } from './decorator/userInfo.decorator';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
-
+import { UserEntity } from './entities/userInfo.entitiy';
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -27,7 +27,9 @@ export class AuthController {
   }
 
   @Get('current')
+  @UserInfo()
   currentUser(@CurrentUser() user: User) {
-    return user;
+    const userInfo = new UserEntity(user);
+    return userInfo;
   }
 }

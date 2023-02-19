@@ -8,9 +8,10 @@ export class TransformInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler) {
     return next.handle().pipe(
       map((data) => {
-        if (!data.code) {
+        if (!data.code && data.code != 0) {
           return result.success(data);
         }
+        return data;
       }),
       catchError((err) => {
         console.log(err);
@@ -23,7 +24,8 @@ export class TransformInterceptor implements NestInterceptor {
         if (err.response) {
           message = err.response.messages;
         }
-        return throwError(() => new HttpException({ code: -1, message }, HttpStatus.BAD_REQUEST));
+
+        return throwError(() => new HttpException(result.err(message), HttpStatus.OK));
       }),
     );
   }

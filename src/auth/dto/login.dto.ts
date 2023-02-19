@@ -1,9 +1,8 @@
-import { IsExistsRule } from '@/validate/is-exists.rule';
 import { IsMobilePhone, IsNotEmpty, Length } from 'class-validator';
 
 export class LoginDto {
   // @IsMobilePhone('zh-CN', {}, { message: '手机号输入错误' })
-  @IsExistsRule('user', { message: '手机号不存在' })
+  @IsNotEmpty({ message: '用户名不能为空' })
   name: string;
 
   @IsNotEmpty({ message: '密码不能为空' })
