@@ -27,6 +27,10 @@ export class AuthService {
     const user = await this.prisma.user.findUnique({
       where: { name: dto.name },
     });
+    if (!user) {
+      return result.err('账号未注册');
+    }
+
     if (!(await verify(user.password, dto.password))) {
       return result.err('密码和用户名不匹配');
     }
