@@ -1,5 +1,5 @@
 import { result } from '@/helper';
-import { ListData } from './../common/entities/listData.entity';
+import { paginate } from './../common/entities/listData.entity';
 import { PrismaService } from './../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { CreateMenuDto } from './dto/create-menu.dto';
@@ -61,11 +61,8 @@ export class MenusService {
             : {},
       },
     });
-    const data = new ListData({
-      list,
-      total,
-    });
-    return data;
+
+    return paginate({ list, total });
   }
 
   async findAllMenus() {

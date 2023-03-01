@@ -3,7 +3,7 @@ import { PrismaService } from './../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
-import { ListData } from '@/common/entities/listData.entity';
+import { paginate } from '@/common/entities/listData.entity';
 import { UserRole } from './entities/role.entity';
 
 @Injectable()
@@ -38,14 +38,9 @@ export class RoleService {
       },
       where: {},
     });
-    const list = res.map((item) => {
-      const menuList = item.roleOnMenus.map((item) => ({ id: item.Menu.id, name: item.Menu.name }));
-      Reflect.deleteProperty(item, 'roleOnMenus');
 
-      return { ...item, menuList };
-    });
     const total = await this.prisma.role.count();
-    return new ListData({ list, total });
+    return paginate({ list: res as unknown as UserRole[], total }, UserRole);
   }
 
   findOne(id: number) {

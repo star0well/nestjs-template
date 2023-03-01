@@ -4,6 +4,7 @@ import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { MenusModule } from './menus/menus.module';
 import { RoleModule } from './role/role.module';
+import { UserModule } from './user/user.module';
 import configs from './config/index';
 
 @Module({
@@ -16,6 +17,7 @@ import configs from './config/index';
     PrismaModule,
     MenusModule,
     RoleModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],
