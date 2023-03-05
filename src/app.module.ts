@@ -13,6 +13,7 @@ import configs from './config/index';
       isGlobal: true,
       load: configs,
     }),
+
     AuthModule,
     PrismaModule,
     MenusModule,

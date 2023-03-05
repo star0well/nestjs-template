@@ -1,10 +1,12 @@
-import { result } from './../helper';
 import { PrismaService } from './../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { paginate } from '@/common/entities/listData.entity';
 import { UserRole } from './entities/role.entity';
+import { PageInfo } from '@/common/dto/pageInfo.dto';
+import { User, UserOnRole, Menu as MenuPr } from '@prisma/client';
+import { Menu } from '@/menus/entities/menu.entity';
 
 @Injectable()
 export class RoleService {
@@ -23,12 +25,9 @@ export class RoleService {
     });
   }
 
-  async findAll(args: Record<string, any>) {
-    const pageSize = args.pageSize ? +args.pageSize : 10;
-    const pageNum = args.pageNum ? +args.pageNum : 1;
+  async findAll(args: PageInfo) {
     const res = await this.prisma.role.findMany({
-      skip: (pageNum - 1) * pageSize,
-      take: +pageSize,
+      ...args,
       include: {
         roleOnMenus: {
           select: {
@@ -69,5 +68,41 @@ export class RoleService {
     return this.prisma.role.delete({
       where: { id },
     });
+  }
+
+  async userMenus(
+    user: User & {
+      UserOnRole: UserOnRole[];
+    },
+  ) {
+    const roleIdList = user.UserOnRole.map((item) => item.roleId);
+    const menuList = await this.prisma.roleOnMenu.findMany({
+      where: {
+        roleId: { in: roleIdList },
+      },
+      select: {
+        Menu: true,
+      },
+      distinct: ['menuId'],
+      orderBy: {
+        Menu: {
+          sort: 'asc',
+        },
+      },
+    });
+    const resulet = menuList.map((item) => ({ ...item.Menu, children: [] }));
+    const list = getTrees(resulet);
+    return paginate({ list }, Menu);
+  }
+}
+function getTrees(list: Menu[], parent_id: number = null) {
+  let parentObj = {};
+  list.forEach((o) => {
+    parentObj[o.id] = o;
+  });
+  if (!parent_id) {
+    return list.filter((o) => !parentObj[o.pid]).map((o) => ((o.children = getTrees(list, o.id)), o));
+  } else {
+    return list.filter((o) => o.pid == parent_id).map((o) => ((o.children = getTrees(list, o.id)), o));
   }
 }

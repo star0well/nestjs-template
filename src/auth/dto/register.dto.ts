@@ -1,6 +1,7 @@
 import { IsConfirmRule } from '@/validate/is-confirm.rule';
 import { IsNotExistsRule } from '@/validate/is-not-exists.rule';
-import { IsMobilePhone, IsNotEmpty, Length } from 'class-validator';
+import { Type } from 'class-transformer';
+import { Allow, IsMobilePhone, IsNotEmpty, Length } from 'class-validator';
 
 export class RegisterDto {
   // @IsMobilePhone('zh-CN', {}, { message: '手机号输入错误' })

@@ -4,6 +4,7 @@ import { CreateMenuDto } from './dto/create-menu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
 import { SearchMenuDto } from './dto/search.menu.dto';
 import { PageInfo } from '@/common/dto/pageInfo.dto';
+import { PaginateInfo } from '@/common/decorator/paginateInfo.decorator';
 
 @Controller('menus')
 export class MenusController {
@@ -15,8 +16,8 @@ export class MenusController {
   }
 
   @Get()
-  findAll(@Query() args: SearchMenuDto, @Query() page: PageInfo) {
-    return this.menusService.findAll(args, page);
+  findAll(@Query() args: SearchMenuDto, @PaginateInfo() Page: PageInfo) {
+    return this.menusService.findAll(args, Page);
   }
   @Get('/list')
   findAllMenus() {

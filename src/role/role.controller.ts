@@ -3,6 +3,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
+import { PaginateInfo } from '@/common/decorator/paginateInfo.decorator';
+import { UserInfo } from '@/auth/decorator/userInfo.decorator';
+import { CurrentUser } from '@/auth/decorator/user.decorator';
+import { User, UserOnRole } from '@prisma/client';
 
 @Controller('role')
 export class RoleController {
@@ -14,10 +18,14 @@ export class RoleController {
   }
 
   @Get()
-  findAll(@Query() page: PageInfo) {
+  findAll(@PaginateInfo() page: PageInfo) {
     return this.roleService.findAll(page);
   }
-
+  @Get('menus')
+  @UserInfo()
+  userMenu(@CurrentUser() user) {
+    return this.roleService.userMenus(user);
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.roleService.findOne(+id);

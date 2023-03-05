@@ -16,6 +16,9 @@ export class UserInfoGuard implements CanActivate {
         where: {
           id,
         },
+        include: {
+          UserOnRole: true,
+        },
       });
       context.switchToHttp().getRequest().userInfo = res;
       return Promise.resolve(true);

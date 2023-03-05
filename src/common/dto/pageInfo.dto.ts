@@ -1,7 +1,8 @@
-import { IsOptional } from 'class-validator';
+import { Allow } from 'class-validator';
 export class PageInfo {
-  @IsOptional()
-  pageNum: number;
-  @IsOptional()
-  pageSize: number;
+  @Allow()
+  take: number;
+
+  @Allow()
+  skip: number;
 }

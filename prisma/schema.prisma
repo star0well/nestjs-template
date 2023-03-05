@@ -11,11 +11,12 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement()) @db.UnsignedInt
-  name      String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int          @id @default(autoincrement()) @db.UnsignedInt
+  name       String       @unique
+  password   String
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  UserOnRole UserOnRole[]
 }
 
 model Menu {
@@ -40,6 +41,7 @@ model Role {
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   roleOnMenus RoleOnMenu[]
+  UserOnRole  UserOnRole[]
 }
 
 model RoleOnMenu {
@@ -51,4 +53,14 @@ model RoleOnMenu {
   roleId    Int      @db.UnsignedInt
   Menu      Menu     @relation(fields: [menuId], references: [id], onDelete: Cascade)
   menuId    Int      @db.UnsignedInt
+}
+
+model UserOnRole {
+  User   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int  @db.UnsignedInt
+
+  Role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  roleId Int  @db.UnsignedInt
+
+  @@id([userId, roleId])
 }

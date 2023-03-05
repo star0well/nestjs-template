@@ -5,6 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
 import { SearchMenuDto } from './dto/search.menu.dto';
+import { PageInfo } from '@/common/dto/pageInfo.dto';
 
 @Injectable()
 export class MenusService {
@@ -15,12 +16,9 @@ export class MenusService {
     });
   }
 
-  async findAll(search: SearchMenuDto, args: Record<string, any>) {
-    const pageSize = args.pageSize ? +args.pageSize : 10;
-    const pageNum = args.pageNum ? +args.pageNum : 1;
+  async findAll(search: SearchMenuDto, Page: PageInfo) {
     const list = await this.prisma.menu.findMany({
-      skip: (pageNum - 1) * pageSize,
-      take: +pageSize,
+      ...Page,
       include: {
         children: {
           include: {
@@ -30,7 +28,6 @@ export class MenusService {
       },
       where: {
         pid: null,
-
         name: {
           contains: search.name,
         },
@@ -43,12 +40,14 @@ export class MenusService {
             : {},
       },
       orderBy: {
-        sort: 'desc',
+        sort: 'asc',
       },
     });
 
     const total = await this.prisma.menu.count({
       where: {
+        pid: null,
+
         name: {
           contains: search.name,
         },
