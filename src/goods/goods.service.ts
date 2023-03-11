@@ -27,10 +27,15 @@ export class GoodsService {
   }
 
   update(id: number, updateGoodDto: UpdateGoodDto) {
-    return `This action updates a #${id} good`;
+    return this.prisma.goods.update({
+      where: { id },
+      data: updateGoodDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} good`;
+    return this.prisma.goods.delete({
+      where: { id },
+    });
   }
 }
