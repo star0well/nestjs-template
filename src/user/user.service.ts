@@ -7,7 +7,7 @@ import { paginate } from '@/common/entities/listData.entity';
 import { User as other, UserOnRole } from '@prisma/client';
 import { Exclude, Expose, Transform } from 'class-transformer';
 import dayjs from 'dayjs';
-import { PageInfo } from '@/common/dto/pageInfo.dto';
+import { PageInfoDto } from '@/common/dto/PageInfo.dto';
 
 class UsereN {
   @Transform((item) => {
@@ -61,7 +61,7 @@ export class UserService {
     });
   }
 
-  async findAll(query, page: PageInfo) {
+  async findAll(query, page: PageInfoDto) {
     const list = await this.prisma.user.findMany({
       ...page,
       include: {

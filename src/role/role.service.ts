@@ -4,7 +4,7 @@ import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { paginate } from '@/common/entities/listData.entity';
 import { UserRole } from './entities/role.entity';
-import { PageInfo } from '@/common/dto/pageInfo.dto';
+import { PageInfoDto } from '@/common/dto/PageInfo.dto';
 import { User, UserOnRole, Menu as MenuPr } from '@prisma/client';
 import { Menu } from '@/menus/entities/menu.entity';
 
@@ -25,7 +25,7 @@ export class RoleService {
     });
   }
 
-  async findAll(args: PageInfo) {
+  async findAll(args: PageInfoDto) {
     const res = await this.prisma.role.findMany({
       ...args,
       include: {

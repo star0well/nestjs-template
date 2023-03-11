@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
 import { SearchMenuDto } from './dto/search.menu.dto';
-import { PageInfo } from '@/common/dto/pageInfo.dto';
+import { PageInfoDto } from '@/common/dto/PageInfo.dto';
 
 @Injectable()
 export class MenusService {
@@ -16,7 +16,7 @@ export class MenusService {
     });
   }
 
-  async findAll(search: SearchMenuDto, Page: PageInfo) {
+  async findAll(search: SearchMenuDto, Page: PageInfoDto) {
     const list = await this.prisma.menu.findMany({
       ...Page,
       include: {

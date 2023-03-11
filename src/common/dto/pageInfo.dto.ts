@@ -1,5 +1,5 @@
 import { Allow } from 'class-validator';
-export class PageInfo {
+export class PageInfoDto {
   @Allow()
   take: number;
 

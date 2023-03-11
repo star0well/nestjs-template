@@ -12,7 +12,7 @@ export const PaginateInfo = createParamDecorator((data: unknown, ctx: ExecutionC
   if (isNaN(Number(skip)) || Number(skip) <= 1) {
     skip = 0;
   }
-  const pageInfo = { skip: Math.floor(skip * take), take: +take };
+  const PageInfoDto = { skip: Math.floor(skip * take), take: +take };
 
-  return pageInfo;
+  return PageInfoDto;
 });

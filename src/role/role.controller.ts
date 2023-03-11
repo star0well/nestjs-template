@@ -1,4 +1,4 @@
-import { PageInfo } from './../common/dto/pageInfo.dto';
+import { PageInfoDto } from '@/common/dto/PageInfo.dto';
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
@@ -18,7 +18,7 @@ export class RoleController {
   }
 
   @Get()
-  findAll(@PaginateInfo() page: PageInfo) {
+  findAll(@PaginateInfo() page: PageInfoDto) {
     return this.roleService.findAll(page);
   }
   @Get('menus')

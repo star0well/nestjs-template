@@ -5,7 +5,9 @@ import { PrismaModule } from './prisma/prisma.module';
 import { MenusModule } from './menus/menus.module';
 import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
+import { GoodsModule } from './goods/goods.module';
 import configs from './config/index';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import configs from './config/index';
     MenusModule,
     RoleModule,
     UserModule,
+    GoodsModule,
+    UploadModule,
   ],
   controllers: [],
   providers: [],
