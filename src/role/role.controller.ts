@@ -22,7 +22,7 @@ export class RoleController {
     return this.roleService.findAll(page);
   }
   @Get('menus')
-  @UserInfo()
+  @UserInfo(false)
   userMenu(@CurrentUser() user) {
     return this.roleService.userMenus(user);
   }

@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { Allow, IsNotEmpty, IsOptional } from 'class-validator';
 export class CreateMenuDto {
   @IsNotEmpty({ message: '菜单名不能为空' })
   name: string;
@@ -17,4 +17,6 @@ export class CreateMenuDto {
   @Type(() => Number)
   @IsNotEmpty({ message: '菜单排序不能为空' })
   sort: number;
+  @Allow()
+  cPath: string;
 }

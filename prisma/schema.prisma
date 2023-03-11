@@ -27,6 +27,7 @@ model Menu {
   path        String
   type        Int
   sort        Int
+  cPath       String       @default("") ///权限菜单请求地址
   parentInfo  Menu?        @relation("parentInfoChildren", fields: [pid], references: [id])
   children    Menu[]       @relation("parentInfoChildren")
   menuOnRoles RoleOnMenu[]

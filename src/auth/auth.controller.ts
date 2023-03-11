@@ -21,13 +21,13 @@ export class AuthController {
   }
 
   @Post('reset-password')
-  @UserInfo()
+  @UserInfo(false)
   resetPassword(@Body() dto: ResetPasswordDto, @CurrentUser() user: User) {
     return this.authService.resetPassword(dto, user);
   }
 
   @Get('current')
-  @UserInfo()
+  @UserInfo(false)
   currentUser(@CurrentUser() user: User) {
     const userInfo = new UserEntity(user);
     return userInfo;

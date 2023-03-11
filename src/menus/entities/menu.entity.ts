@@ -10,6 +10,7 @@ export class Menu {
   pid?: number;
 
   id: number;
+
   constructor(options: Partial<MenuPr>) {
     Object.assign(this, options);
   }

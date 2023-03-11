@@ -8,13 +8,15 @@ export class TransformInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler) {
     return next.handle().pipe(
       map((data) => {
+        console.log('data', data);
+
         if (!data.code && data.code != 0) {
           return result.success(data);
         }
         return data;
       }),
       catchError((err) => {
-        console.log(err);
+        debugger;
         const name = err.constructor.name;
         let message = '';
         message = err;
