@@ -1,4 +1,4 @@
-import { PageInfoDto } from '@/common/dto/PageInfo.dto';
+import { PageInfoDto } from '@/common/dto/pageInfo.dto';
 import { paginate } from '@/common/entities/listData.entity';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';

@@ -7,7 +7,7 @@ import { paginate } from '@/common/entities/listData.entity';
 import { User as other, UserOnRole } from '@prisma/client';
 import { Exclude, Expose, Transform } from 'class-transformer';
 import dayjs from 'dayjs';
-import { PageInfoDto } from '@/common/dto/PageInfo.dto';
+import { PageInfoDto } from '@/common/dto/pageInfo.dto';
 
 class UsereN {
   @Transform((item) => {

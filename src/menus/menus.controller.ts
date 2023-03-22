@@ -4,7 +4,7 @@ import { MenusService } from './menus.service';
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
 import { SearchMenuDto } from './dto/search.menu.dto';
-import { PageInfoDto } from '@/common/dto/PageInfo.dto';
+import { PageInfoDto } from '@/common/dto/pageInfo.dto';
 import { PaginateInfo } from '@/common/decorator/paginateInfo.decorator';
 
 @Controller('menus')

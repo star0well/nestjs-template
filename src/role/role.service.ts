@@ -4,7 +4,7 @@ import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { paginate } from '@/common/entities/listData.entity';
 import { UserRole } from './entities/role.entity';
-import { PageInfoDto } from '@/common/dto/PageInfo.dto';
+import { PageInfoDto } from '@/common/dto/pageInfo.dto';
 import { User, UserOnRole, Menu as MenuPr } from '@prisma/client';
 import { Menu } from '@/menus/entities/menu.entity';
 

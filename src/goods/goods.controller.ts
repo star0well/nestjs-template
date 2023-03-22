@@ -3,7 +3,7 @@ import { GoodsService } from './goods.service';
 import { CreateGoodDto } from './dto/create-good.dto';
 import { UpdateGoodDto } from './dto/update-good.dto';
 import { PaginateInfo } from '@/common/decorator/paginateInfo.decorator';
-import { PageInfoDto } from '@/common/dto/PageInfo.dto';
+import { PageInfoDto } from '@/common/dto/pageInfo.dto';
 
 @Controller('goods')
 export class GoodsController {
