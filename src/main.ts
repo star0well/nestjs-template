@@ -14,7 +14,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidatePipe({ transform: true, whitelist: true }));
   app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
-
+  app.setGlobalPrefix('api');
   // const { httpAdapter } = app.get(HttpAdapterHost);
   // app.useGlobalFilters(new ExceptionsFilter(httpAdapter));
   await app.listen(3000);
