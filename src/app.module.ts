@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule as AuthUserModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { MenusModule } from './menus/menus.module';
 import { RoleModule } from './role/role.module';
@@ -16,7 +16,7 @@ import { UploadModule } from './upload/upload.module';
       load: configs,
     }),
 
-    AuthModule,
+    AuthUserModule,
     PrismaModule,
     MenusModule,
     RoleModule,
